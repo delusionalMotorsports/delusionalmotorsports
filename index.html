@@ -1,0 +1,920 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Delusional Motorsports</title>
+<link rel="stylesheet" href="https://unpkg.com/@tabler/icons-webfont@2.47.0/tabler-icons.min.css">
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Mono:wght@400;500&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  :root {
+    --blue: #2a4fd4;
+    --blue-bright: #3d63f5;
+    --blue-dark: #1a35a8;
+    --blue-deeper: #0f2178;
+    --blue-glow: rgba(42, 79, 212, 0.18);
+    --blue-tint: rgba(42, 79, 212, 0.10);
+    --steel: #444441;
+    --steel-light: #9a9894;
+    --off-white: #e8e6e0;
+    --black: #0d0d0c;
+    --surface: #111110;
+    --surface2: #161614;
+    --border: rgba(255,255,255,0.07);
+    --font-display: 'Bebas Neue', sans-serif;
+    --font-mono: 'DM Mono', monospace;
+    --font-body: 'DM Sans', sans-serif;
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: var(--font-body);
+    background: var(--black);
+    color: var(--off-white);
+    overflow-x: hidden;
+  }
+
+  /* ── NAV ── */
+  nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem 3rem;
+    border-bottom: 1px solid var(--border);
+    position: sticky;
+    top: 0;
+    background: rgba(13,13,12,0.94);
+    backdrop-filter: blur(10px);
+    z-index: 100;
+  }
+
+  .nav-logo img {
+    height: 48px;
+    width: auto;
+    display: block;
+  }
+
+  .nav-links {
+    display: flex;
+    gap: 2.5rem;
+    list-style: none;
+  }
+  .nav-links a {
+    font-family: var(--font-mono);
+    font-size: 0.70rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--steel-light);
+    text-decoration: none;
+    transition: color 0.2s;
+  }
+  .nav-links a:hover { color: var(--blue-bright); }
+
+  /* ── HERO ── */
+  .hero {
+    min-height: 90vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    padding: 5rem 3rem 4rem;
+    position: relative;
+    overflow: hidden;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .hero-bg-text {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -52%);
+    font-family: var(--font-display);
+    font-size: 28vw;
+    color: rgba(255,255,255,0.018);
+    white-space: nowrap;
+    pointer-events: none;
+    user-select: none;
+    letter-spacing: -0.02em;
+  }
+
+  /* Subtle blue glow behind hero text */
+  .hero::before {
+    content: '';
+    position: absolute;
+    left: -10%;
+    bottom: 0;
+    width: 55%;
+    height: 60%;
+    background: radial-gradient(ellipse at bottom left, rgba(42,79,212,0.12) 0%, transparent 70%);
+    pointer-events: none;
+  }
+
+  .hero-tag {
+    font-family: var(--font-mono);
+    font-size: 0.68rem;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--blue-bright);
+    margin-bottom: 1.4rem;
+  }
+
+  .hero-title {
+    font-family: var(--font-display);
+    font-size: clamp(4.5rem, 11vw, 10rem);
+    line-height: 0.90;
+    letter-spacing: 0.01em;
+    color: var(--off-white);
+    margin-bottom: 2rem;
+  }
+  .hero-title .accent { color: var(--blue-bright); }
+
+  .hero-sub {
+    font-size: 1rem;
+    font-weight: 300;
+    color: var(--steel-light);
+    max-width: 500px;
+    line-height: 1.75;
+    margin-bottom: 2.8rem;
+  }
+
+  .hero-ctas {
+    display: flex;
+    gap: 1rem;
+    align-items: center;
+    flex-wrap: wrap;
+  }
+
+  .btn-primary {
+    font-family: var(--font-mono);
+    font-size: 0.70rem;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    background: var(--blue);
+    color: white;
+    border: none;
+    padding: 0.95rem 2.2rem;
+    cursor: pointer;
+    text-decoration: none;
+    display: inline-block;
+    transition: background 0.2s;
+  }
+  .btn-primary:hover { background: var(--blue-bright); }
+
+  .btn-ghost {
+    font-family: var(--font-mono);
+    font-size: 0.70rem;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    background: transparent;
+    color: var(--off-white);
+    border: 1px solid rgba(255,255,255,0.2);
+    padding: 0.95rem 2.2rem;
+    cursor: pointer;
+    text-decoration: none;
+    display: inline-block;
+    transition: border-color 0.2s, color 0.2s;
+  }
+  .btn-ghost:hover { border-color: var(--blue-bright); color: var(--blue-bright); }
+
+  .hero-stats {
+    position: absolute;
+    right: 3rem;
+    bottom: 4rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1.8rem;
+    align-items: flex-end;
+  }
+  .stat-item { text-align: right; }
+  .stat-num {
+    font-family: var(--font-display);
+    font-size: 2.6rem;
+    color: var(--off-white);
+    line-height: 1;
+  }
+  .stat-num span { color: var(--blue-bright); }
+  .stat-label {
+    font-family: var(--font-mono);
+    font-size: 0.60rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--steel-light);
+    margin-top: 0.25rem;
+  }
+
+  /* ── PHILOSOPHY STRIP ── */
+  .philosophy-strip {
+    background: var(--blue-dark);
+    border-top: 1px solid rgba(61,99,245,0.3);
+    border-bottom: 1px solid rgba(61,99,245,0.3);
+    padding: 3rem 3rem;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2.5rem;
+  }
+
+  .phil-item {
+    border-left: 2px solid rgba(255,255,255,0.25);
+    padding-left: 1.4rem;
+  }
+
+  .phil-word {
+    font-family: var(--font-display);
+    font-size: 2.6rem;
+    color: white;
+    letter-spacing: 0.06em;
+    line-height: 1;
+    margin-bottom: 0.5rem;
+  }
+
+  .phil-desc {
+    font-size: 0.84rem;
+    color: rgba(255,255,255,0.7);
+    line-height: 1.7;
+    font-weight: 300;
+  }
+
+  /* ── SHARED SECTION ── */
+  .section {
+    padding: 5.5rem 3rem;
+  }
+
+  .section-header {
+    display: flex;
+    align-items: baseline;
+    gap: 1.5rem;
+    margin-bottom: 3.5rem;
+  }
+  .section-num {
+    font-family: var(--font-mono);
+    font-size: 0.68rem;
+    color: var(--blue-bright);
+    letter-spacing: 0.12em;
+  }
+  .section-title {
+    font-family: var(--font-display);
+    font-size: clamp(2.8rem, 5vw, 4.5rem);
+    letter-spacing: 0.02em;
+    color: var(--off-white);
+    line-height: 1;
+  }
+
+  .divider {
+    border: none;
+    border-top: 1px solid var(--border);
+  }
+
+  /* ── PROJECT ── */
+  .project-layout {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 3rem;
+    align-items: start;
+  }
+
+  .project-card {
+    background: var(--surface2);
+    border: 1px solid var(--border);
+    padding: 2.2rem;
+  }
+
+  .project-badge {
+    font-family: var(--font-mono);
+    font-size: 0.62rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--blue-bright);
+    background: var(--blue-tint);
+    border: 1px solid rgba(61,99,245,0.2);
+    display: inline-block;
+    padding: 0.3rem 0.9rem;
+    margin-bottom: 1.4rem;
+  }
+
+  .project-name {
+    font-family: var(--font-display);
+    font-size: 3.5rem;
+    color: var(--off-white);
+    letter-spacing: 0.05em;
+    line-height: 1;
+    margin-bottom: 0.4rem;
+  }
+
+  .project-subtitle {
+    font-family: var(--font-mono);
+    font-size: 0.68rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--steel-light);
+    margin-bottom: 1.8rem;
+  }
+
+  .project-desc {
+    font-size: 0.92rem;
+    color: var(--steel-light);
+    line-height: 1.85;
+    margin-bottom: 2.2rem;
+  }
+
+  .spec-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1.2rem;
+  }
+
+  .spec-item {
+    border-left: 2px solid var(--blue);
+    padding-left: 0.9rem;
+  }
+  .spec-label {
+    font-family: var(--font-mono);
+    font-size: 0.58rem;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--steel-light);
+    margin-bottom: 0.2rem;
+  }
+  .spec-value {
+    font-size: 0.88rem;
+    color: var(--off-white);
+    font-weight: 500;
+  }
+
+  /* Bug illustration */
+  .bug-illustration {
+    width: 100%;
+    aspect-ratio: 4/3;
+    background: var(--surface2);
+    border: 1px solid var(--border);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    overflow: hidden;
+  }
+  .bug-svg-wrap { width: 85%; }
+
+  /* ── SERVICES ── */
+  .services-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.5rem;
+  }
+
+  .service-card {
+    border: 1px solid var(--border);
+    padding: 2rem 1.6rem;
+    background: var(--surface2);
+    transition: border-color 0.25s, background 0.25s;
+    cursor: default;
+  }
+  .service-card:hover {
+    border-color: rgba(42,79,212,0.45);
+    background: var(--blue-tint);
+  }
+
+  .service-icon {
+    width: 42px;
+    height: 42px;
+    border: 1px solid rgba(42,79,212,0.3);
+    background: var(--blue-tint);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 1.3rem;
+    color: var(--blue-bright);
+    font-size: 1.15rem;
+  }
+
+  .service-name {
+    font-family: var(--font-display);
+    font-size: 1.7rem;
+    color: var(--off-white);
+    letter-spacing: 0.04em;
+    margin-bottom: 0.8rem;
+    line-height: 1.1;
+  }
+
+  .service-desc {
+    font-size: 0.83rem;
+    color: var(--steel-light);
+    line-height: 1.78;
+  }
+
+  /* ── CHANNEL ── */
+  .channel-block {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 4rem;
+    align-items: center;
+  }
+
+  .channel-text h3 {
+    font-family: var(--font-display);
+    font-size: 2.8rem;
+    color: var(--off-white);
+    letter-spacing: 0.03em;
+    line-height: 1.05;
+    margin-bottom: 1.2rem;
+  }
+
+  .channel-text p {
+    font-size: 0.92rem;
+    color: var(--steel-light);
+    line-height: 1.82;
+    margin-bottom: 1.4rem;
+  }
+
+  .yt-embed-block {
+    background: var(--surface2);
+    border: 1px solid var(--border);
+    padding: 1.6rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1.1rem;
+  }
+
+  .yt-thumb {
+    width: 100%;
+    aspect-ratio: 16/9;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    text-decoration: none;
+    position: relative;
+    overflow: hidden;
+    transition: border-color 0.2s;
+  }
+  .yt-thumb:hover { border-color: rgba(42,79,212,0.5); }
+
+  .yt-play-btn {
+    width: 60px;
+    height: 60px;
+    background: var(--blue);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.5rem;
+    color: white;
+    transition: transform 0.2s, background 0.2s;
+  }
+  .yt-thumb:hover .yt-play-btn { transform: scale(1.1); background: var(--blue-bright); }
+
+  .yt-label {
+    font-family: var(--font-mono);
+    font-size: 0.63rem;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--blue-bright);
+  }
+
+  /* ── CONTACT ── */
+  .contact-layout {
+    display: grid;
+    grid-template-columns: 1fr 1.5fr;
+    gap: 4.5rem;
+    align-items: start;
+  }
+
+  .contact-info p {
+    font-size: 0.92rem;
+    color: var(--steel-light);
+    line-height: 1.82;
+    margin-bottom: 2.2rem;
+  }
+
+  .contact-links {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+  }
+
+  .contact-link {
+    display: flex;
+    align-items: center;
+    gap: 0.9rem;
+    font-family: var(--font-mono);
+    font-size: 0.70rem;
+    letter-spacing: 0.1em;
+    color: var(--steel-light);
+    text-decoration: none;
+    padding: 1rem 0;
+    border-bottom: 1px solid var(--border);
+    transition: color 0.2s;
+  }
+  .contact-link:hover { color: var(--blue-bright); }
+  .contact-link .contact-icon { color: var(--blue-bright); font-size: 1rem; width: 22px; }
+
+  .contact-form-area {
+    display: flex;
+    flex-direction: column;
+    gap: 1.1rem;
+  }
+
+  .form-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1.1rem;
+  }
+
+  .field-group {
+    display: flex;
+    flex-direction: column;
+    gap: 0.45rem;
+  }
+
+  .field-label {
+    font-family: var(--font-mono);
+    font-size: 0.60rem;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--steel-light);
+  }
+
+  .field-input {
+    background: var(--surface2);
+    border: 1px solid rgba(255,255,255,0.1);
+    color: var(--off-white);
+    padding: 0.8rem 1rem;
+    font-family: var(--font-body);
+    font-size: 0.9rem;
+    outline: none;
+    transition: border-color 0.2s;
+    width: 100%;
+  }
+  .field-input:focus { border-color: var(--blue); }
+  .field-input::placeholder { color: var(--steel-light); opacity: 0.45; }
+  textarea.field-input { resize: vertical; min-height: 110px; }
+  select.field-input { cursor: pointer; appearance: none; }
+
+  /* ── FOOTER ── */
+  footer {
+    padding: 2rem 3rem;
+    border-top: 1px solid var(--border);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: var(--surface);
+  }
+
+  .footer-logo img {
+    height: 36px;
+    width: auto;
+    opacity: 0.7;
+    transition: opacity 0.2s;
+  }
+  .footer-logo img:hover { opacity: 1; }
+
+  .footer-copy {
+    font-family: var(--font-mono);
+    font-size: 0.60rem;
+    letter-spacing: 0.12em;
+    color: var(--steel-light);
+    opacity: 0.45;
+  }
+</style>
+</head>
+<body>
+
+<!-- ── NAV ── -->
+<nav>
+  <div class="nav-logo">
+    <!-- Replace src with your actual logo path or hosted URL -->
+    <img src="logo.png" alt="Delusional Motorsports">
+  </div>
+  <ul class="nav-links">
+    <li><a href="#project">Project Jo-Jo</a></li>
+    <li><a href="#services">Services</a></li>
+    <li><a href="#channel">Channel</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+</nav>
+
+<!-- ── HERO ── -->
+<section class="hero">
+  <div class="hero-bg-text">DM</div>
+
+  <div class="hero-tag">// Portland, Oregon &nbsp;·&nbsp; Est. 2024</div>
+  <h1 class="hero-title">
+    Calculated.<br>Fabricated.<br><span class="accent">Delusional.</span>
+  </h1>
+  <p class="hero-sub">
+    Professional engineering applied to garage-built madness.
+    Custom chassis fabrication, aerodynamic component design,
+    and bespoke powertrain solutions for those who refuse to settle for stock.
+  </p>
+  <div class="hero-ctas">
+    <a href="#project" class="btn-primary">Follow Project Jo-Jo</a>
+    <a href="https://www.youtube.com/channel/UCsoa295gY2Qj58TnqipNcmw" class="btn-ghost" target="_blank" rel="noopener">Watch on YouTube ↗</a>
+  </div>
+
+  <div class="hero-stats">
+    <div class="stat-item">
+      <div class="stat-num">'<span>64</span></div>
+      <div class="stat-label">VW Beetle</div>
+    </div>
+    <div class="stat-item">
+      <div class="stat-num">EJ25</div>
+      <div class="stat-label">Subaru Engine</div>
+    </div>
+    <div class="stat-item">
+      <div class="stat-num">0</div>
+      <div class="stat-label">Stock Parts Remaining</div>
+    </div>
+  </div>
+</section>
+
+<!-- ── PHILOSOPHY STRIP ── -->
+<div class="philosophy-strip">
+  <div class="phil-item">
+    <div class="phil-word">Calculated.</div>
+    <div class="phil-desc">Engineering-first approach to every build decision. CAD before cuts. Simulation before steel.</div>
+  </div>
+  <div class="phil-item">
+    <div class="phil-word">Fabricated.</div>
+    <div class="phil-desc">Everything is made, not bought. Bespoke chassis, suspension, aero — built from raw material up.</div>
+  </div>
+  <div class="phil-item">
+    <div class="phil-word">Delusional.</div>
+    <div class="phil-desc">Because they said it couldn't be done. A mid-engine, Subaru-powered '64 Bug disagrees.</div>
+  </div>
+</div>
+
+<!-- ── PROJECT ── -->
+<section class="section" id="project">
+  <div class="section-header">
+    <span class="section-num">01 /</span>
+    <h2 class="section-title">Project Jo-Jo</h2>
+  </div>
+
+  <div class="project-layout">
+    <div class="project-card">
+      <div class="project-badge">// Active Build</div>
+      <div class="project-name">JO-JO</div>
+      <div class="project-subtitle">1964 VW Beetle — Mid-Engine Restomod</div>
+      <p class="project-desc">
+        A ground-up chassis rebuild transforming a classic air-cooled Beetle into a purpose-built,
+        mid-engine performance machine. Every component is engineered from scratch —
+        from the custom tubular chassis and bespoke multi-link suspension to the EJ25 Subaru
+        flat-four repositioned and modified to live behind the driver. This is not a kit build.
+        This is engineering from first principles, documented in full.
+      </p>
+      <div class="spec-grid">
+        <div class="spec-item">
+          <div class="spec-label">Chassis</div>
+          <div class="spec-value">Full custom tubular</div>
+        </div>
+        <div class="spec-item">
+          <div class="spec-label">Engine</div>
+          <div class="spec-value">Subaru EJ25 — modified</div>
+        </div>
+        <div class="spec-item">
+          <div class="spec-label">Layout</div>
+          <div class="spec-value">Mid-engine, RWD</div>
+        </div>
+        <div class="spec-item">
+          <div class="spec-label">Suspension</div>
+          <div class="spec-value">Bespoke — all four corners</div>
+        </div>
+        <div class="spec-item">
+          <div class="spec-label">Aero</div>
+          <div class="spec-value">Custom designed bodywork</div>
+        </div>
+        <div class="spec-item">
+          <div class="spec-label">Status</div>
+          <div class="spec-value">Chassis build phase</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Beetle schematic illustration -->
+    <div class="bug-illustration">
+      <svg viewBox="0 0 500 320" xmlns="http://www.w3.org/2000/svg" class="bug-svg-wrap">
+        <line x1="60" y1="280" x2="440" y2="280" stroke="rgba(255,255,255,0.07)" stroke-width="1"/>
+
+        <!-- Wheels -->
+        <circle cx="140" cy="270" r="32" fill="none" stroke="rgba(255,255,255,0.12)" stroke-width="2"/>
+        <circle cx="140" cy="270" r="18" fill="none" stroke="rgba(42,79,212,0.5)" stroke-width="1.5"/>
+        <circle cx="140" cy="270" r="4" fill="rgba(42,79,212,0.8)"/>
+
+        <circle cx="360" cy="270" r="32" fill="none" stroke="rgba(255,255,255,0.12)" stroke-width="2"/>
+        <circle cx="360" cy="270" r="18" fill="none" stroke="rgba(42,79,212,0.5)" stroke-width="1.5"/>
+        <circle cx="360" cy="270" r="4" fill="rgba(42,79,212,0.8)"/>
+
+        <!-- Chassis rail -->
+        <rect x="110" y="238" width="280" height="6" rx="3" fill="rgba(42,79,212,0.18)" stroke="rgba(42,79,212,0.45)" stroke-width="0.5"/>
+
+        <!-- Body silhouette -->
+        <path d="M110,238 Q120,140 170,110 Q220,85 250,82 Q280,85 330,110 Q380,140 390,238 Z"
+              fill="rgba(255,255,255,0.03)" stroke="rgba(255,255,255,0.14)" stroke-width="1.5"/>
+
+        <!-- Roof line -->
+        <path d="M185,145 Q220,100 250,95 Q280,100 315,145"
+              fill="none" stroke="rgba(255,255,255,0.2)" stroke-width="1.5"/>
+
+        <!-- Windshield -->
+        <path d="M185,145 Q210,120 250,115 Q290,120 315,145"
+              fill="rgba(42,79,212,0.06)" stroke="rgba(42,79,212,0.25)" stroke-width="1"/>
+
+        <!-- Engine bay -->
+        <rect x="338" y="188" width="44" height="42" rx="2"
+              fill="rgba(42,79,212,0.12)" stroke="rgba(42,79,212,0.5)" stroke-width="1" stroke-dasharray="5,2"/>
+        <text x="360" y="210" text-anchor="middle" font-family="'DM Mono',monospace" font-size="7.5"
+              fill="rgba(61,99,245,0.9)" letter-spacing="0.06em">EJ25</text>
+        <text x="360" y="222" text-anchor="middle" font-family="'DM Mono',monospace" font-size="6"
+              fill="rgba(61,99,245,0.6)" letter-spacing="0.04em">SUBARU</text>
+
+        <!-- Front trunk -->
+        <rect x="118" y="188" width="38" height="28" rx="2"
+              fill="rgba(255,255,255,0.03)" stroke="rgba(255,255,255,0.08)" stroke-width="1" stroke-dasharray="4,2"/>
+
+        <!-- Labels -->
+        <line x1="360" y1="178" x2="400" y2="155" stroke="rgba(42,79,212,0.35)" stroke-width="0.8"/>
+        <text x="403" y="153" font-family="'DM Mono',monospace" font-size="7.5"
+              fill="rgba(61,99,245,0.75)" letter-spacing="0.07em">MID MTD.</text>
+
+        <!-- Suspension arms -->
+        <line x1="140" y1="252" x2="170" y2="238" stroke="rgba(255,255,255,0.18)" stroke-width="1.5"/>
+        <line x1="140" y1="252" x2="168" y2="256" stroke="rgba(255,255,255,0.18)" stroke-width="1.5"/>
+        <line x1="360" y1="252" x2="330" y2="238" stroke="rgba(255,255,255,0.18)" stroke-width="1.5"/>
+        <line x1="360" y1="252" x2="332" y2="256" stroke="rgba(255,255,255,0.18)" stroke-width="1.5"/>
+
+        <!-- Watermark -->
+        <text x="250" y="310" text-anchor="middle" font-family="'Bebas Neue',sans-serif" font-size="20"
+              fill="rgba(255,255,255,0.06)" letter-spacing="0.22em">PROJECT JO-JO</text>
+      </svg>
+    </div>
+  </div>
+</section>
+
+<hr class="divider">
+
+<!-- ── SERVICES ── -->
+<section class="section" id="services">
+  <div class="section-header">
+    <span class="section-num">02 /</span>
+    <h2 class="section-title">Services</h2>
+  </div>
+
+  <div class="services-grid">
+    <div class="service-card">
+      <div class="service-icon"><i class="ti ti-atom" aria-hidden="true"></i></div>
+      <div class="service-name">Chassis Fabrication</div>
+      <p class="service-desc">Custom tubular and sheet-metal chassis design and fabrication. From ground-up builds to structural modifications — engineered to spec, built to last.</p>
+    </div>
+
+    <div class="service-card">
+      <div class="service-icon"><i class="ti ti-wind" aria-hidden="true"></i></div>
+      <div class="service-name">Aero Component Design</div>
+      <p class="service-desc">Bespoke aerodynamic components for OEM+ and full custom applications. CFD-informed design through to manufactured parts — splitters, diffusers, wings, and bodywork.</p>
+    </div>
+
+    <div class="service-card">
+      <div class="service-icon"><i class="ti ti-settings" aria-hidden="true"></i></div>
+      <div class="service-name">Suspension Engineering</div>
+      <p class="service-desc">Purpose-built suspension geometry design. Multi-link, double wishbone, bespoke uprights — engineered for the application, not adapted from a catalogue.</p>
+    </div>
+
+    <div class="service-card">
+      <div class="service-icon"><i class="ti ti-engine" aria-hidden="true"></i></div>
+      <div class="service-name">Powertrain Adaptation</div>
+      <p class="service-desc">Engine swaps, custom mounts, drivetrain packaging, and bespoke engine modification for non-standard installations — including mid and rear-engine conversions.</p>
+    </div>
+
+    <div class="service-card">
+      <div class="service-icon"><i class="ti ti-ruler-measure" aria-hidden="true"></i></div>
+      <div class="service-name">OEM+ Manufacture</div>
+      <p class="service-desc">Small-batch production of performance components for road and track. Precision fabrication with attention to fitment, finish, and function.</p>
+    </div>
+
+    <div class="service-card">
+      <div class="service-icon"><i class="ti ti-drafting-compass" aria-hidden="true"></i></div>
+      <div class="service-name">Design Consultation</div>
+      <p class="service-desc">Engineering consultation for builders, fabricators, and manufacturers. Concept-to-spec support for projects that need a technical co-pilot from the start.</p>
+    </div>
+  </div>
+</section>
+
+<hr class="divider">
+
+<!-- ── CHANNEL ── -->
+<section class="section" id="channel">
+  <div class="section-header">
+    <span class="section-num">03 /</span>
+    <h2 class="section-title">The Channel</h2>
+  </div>
+
+  <div class="channel-block">
+    <div class="channel-text">
+      <h3>Garage-built madness, documented.</h3>
+      <p>
+        Every weld, every calculation, every failed attempt and hard-won solution —
+        it all goes on the channel. Delusional Motorsports is a build diary for
+        Project Jo-Jo and a resource for anyone tackling their own impossible project
+        with more ambition than budget and more engineering than sense.
+      </p>
+      <p>
+        No fluff. No filler. Just the real process of applying professional
+        engineering methods in a garage, with the tools and time most builders
+        actually have access to.
+      </p>
+      <a href="https://www.youtube.com/channel/UCsoa295gY2Qj58TnqipNcmw" class="btn-primary" target="_blank" rel="noopener" style="margin-top:0.5rem; display:inline-block;">Subscribe on YouTube ↗</a>
+    </div>
+
+    <div class="yt-embed-block">
+      <div class="yt-label">// @DelusionalMotorsports</div>
+      <a href="https://www.youtube.com/channel/UCsoa295gY2Qj58TnqipNcmw" class="yt-thumb" target="_blank" rel="noopener">
+        <div class="yt-play-btn">▶</div>
+      </a>
+      <div style="display:flex; justify-content:space-between; align-items:center;">
+        <div>
+          <div style="font-family:'DM Mono',monospace;font-size:0.62rem;color:var(--steel-light);letter-spacing:0.13em;text-transform:uppercase;">Latest</div>
+          <div style="font-size:0.88rem;color:var(--off-white);margin-top:0.25rem;">Project Jo-Jo — Build Updates</div>
+        </div>
+        <i class="ti ti-brand-youtube" style="color:var(--blue-bright);font-size:1.9rem;" aria-hidden="true"></i>
+      </div>
+    </div>
+  </div>
+</section>
+
+<hr class="divider">
+
+<!-- ── CONTACT ── -->
+<section class="section" id="contact">
+  <div class="section-header">
+    <span class="section-num">04 /</span>
+    <h2 class="section-title">Get In Touch</h2>
+  </div>
+
+  <div class="contact-layout">
+    <div class="contact-info">
+      <p>
+        Whether you have a fabrication project, need aerodynamic components,
+        or want to talk through a build idea — reach out.
+        Delusional Fabrication is early-stage, but the conversations start now.
+      </p>
+      <div class="contact-links">
+        <a href="https://www.youtube.com/channel/UCsoa295gY2Qj58TnqipNcmw" class="contact-link" target="_blank" rel="noopener">
+          <span class="contact-icon"><i class="ti ti-brand-youtube" aria-hidden="true"></i></span>
+          YouTube — @DelusionalMotorsports
+        </a>
+        <a href="mailto:hello@delusionalmotorsports.com" class="contact-link">
+          <span class="contact-icon"><i class="ti ti-mail" aria-hidden="true"></i></span>
+          hello@delusionalmotorsports.com
+        </a>
+        <div class="contact-link" style="cursor:default;">
+          <span class="contact-icon"><i class="ti ti-map-pin" aria-hidden="true"></i></span>
+          Portland, Oregon, USA
+        </div>
+      </div>
+    </div>
+
+    <div class="contact-form-area">
+      <div class="form-row">
+        <div class="field-group">
+          <label class="field-label">Name</label>
+          <input class="field-input" type="text" placeholder="Your name">
+        </div>
+        <div class="field-group">
+          <label class="field-label">Email</label>
+          <input class="field-input" type="email" placeholder="your@email.com">
+        </div>
+      </div>
+      <div class="field-group">
+        <label class="field-label">Project / Enquiry Type</label>
+        <select class="field-input">
+          <option value="" disabled selected>Select a category</option>
+          <option>Chassis Fabrication</option>
+          <option>Aerodynamic Components</option>
+          <option>Suspension Engineering</option>
+          <option>Powertrain Adaptation</option>
+          <option>OEM+ Manufacture</option>
+          <option>Design Consultation</option>
+          <option>Other / General</option>
+        </select>
+      </div>
+      <div class="field-group">
+        <label class="field-label">Tell me about your project</label>
+        <textarea class="field-input" placeholder="What are you building? What do you need?"></textarea>
+      </div>
+      <button class="btn-primary" style="align-self:flex-start; cursor:pointer;">Send Message</button>
+    </div>
+  </div>
+</section>
+
+<!-- ── FOOTER ── -->
+<footer>
+  <div class="footer-logo">
+    <img src="logo.png" alt="Delusional Motorsports">
+  </div>
+  <div class="footer-copy">© 2025 Delusional Motorsports · Portland, Oregon</div>
+</footer>
+
+</body>
+</html>
