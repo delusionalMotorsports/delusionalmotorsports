@@ -847,62 +847,17 @@
       </div>
     </div>
 
-    <!-- Beetle schematic illustration -->
+    <!-- Beetle roll simulation video -->
     <div class="bug-illustration">
-      <svg viewBox="0 0 500 320" xmlns="http://www.w3.org/2000/svg" class="bug-svg-wrap">
-        <line x1="60" y1="280" x2="440" y2="280" stroke="rgba(255,255,255,0.07)" stroke-width="1"/>
-
-        <!-- Wheels -->
-        <circle cx="140" cy="270" r="32" fill="none" stroke="rgba(255,255,255,0.12)" stroke-width="2"/>
-        <circle cx="140" cy="270" r="18" fill="none" stroke="rgba(42,79,212,0.5)" stroke-width="1.5"/>
-        <circle cx="140" cy="270" r="4" fill="rgba(42,79,212,0.8)"/>
-
-        <circle cx="360" cy="270" r="32" fill="none" stroke="rgba(255,255,255,0.12)" stroke-width="2"/>
-        <circle cx="360" cy="270" r="18" fill="none" stroke="rgba(42,79,212,0.5)" stroke-width="1.5"/>
-        <circle cx="360" cy="270" r="4" fill="rgba(42,79,212,0.8)"/>
-
-        <!-- Chassis rail -->
-        <rect x="110" y="238" width="280" height="6" rx="3" fill="rgba(42,79,212,0.18)" stroke="rgba(42,79,212,0.45)" stroke-width="0.5"/>
-
-        <!-- Body silhouette -->
-        <path d="M110,238 Q120,140 170,110 Q220,85 250,82 Q280,85 330,110 Q380,140 390,238 Z"
-              fill="rgba(255,255,255,0.03)" stroke="rgba(255,255,255,0.14)" stroke-width="1.5"/>
-
-        <!-- Roof line -->
-        <path d="M185,145 Q220,100 250,95 Q280,100 315,145"
-              fill="none" stroke="rgba(255,255,255,0.2)" stroke-width="1.5"/>
-
-        <!-- Windshield -->
-        <path d="M185,145 Q210,120 250,115 Q290,120 315,145"
-              fill="rgba(42,79,212,0.06)" stroke="rgba(42,79,212,0.25)" stroke-width="1"/>
-
-        <!-- Engine bay -->
-        <rect x="338" y="188" width="44" height="42" rx="2"
-              fill="rgba(42,79,212,0.12)" stroke="rgba(42,79,212,0.5)" stroke-width="1" stroke-dasharray="5,2"/>
-        <text x="360" y="210" text-anchor="middle" font-family="'DM Mono',monospace" font-size="7.5"
-              fill="rgba(61,99,245,0.9)" letter-spacing="0.06em">EJ25</text>
-        <text x="360" y="222" text-anchor="middle" font-family="'DM Mono',monospace" font-size="6"
-              fill="rgba(61,99,245,0.6)" letter-spacing="0.04em">SUBARU</text>
-
-        <!-- Front trunk -->
-        <rect x="118" y="188" width="38" height="28" rx="2"
-              fill="rgba(255,255,255,0.03)" stroke="rgba(255,255,255,0.08)" stroke-width="1" stroke-dasharray="4,2"/>
-
-        <!-- Labels -->
-        <line x1="360" y1="178" x2="400" y2="155" stroke="rgba(42,79,212,0.35)" stroke-width="0.8"/>
-        <text x="403" y="153" font-family="'DM Mono',monospace" font-size="7.5"
-              fill="rgba(61,99,245,0.75)" letter-spacing="0.07em">MID MTD.</text>
-
-        <!-- Suspension arms -->
-        <line x1="140" y1="252" x2="170" y2="238" stroke="rgba(255,255,255,0.18)" stroke-width="1.5"/>
-        <line x1="140" y1="252" x2="168" y2="256" stroke="rgba(255,255,255,0.18)" stroke-width="1.5"/>
-        <line x1="360" y1="252" x2="330" y2="238" stroke="rgba(255,255,255,0.18)" stroke-width="1.5"/>
-        <line x1="360" y1="252" x2="332" y2="256" stroke="rgba(255,255,255,0.18)" stroke-width="1.5"/>
-
-        <!-- Watermark -->
-        <text x="250" y="310" text-anchor="middle" font-family="'Bebas Neue',sans-serif" font-size="20"
-              fill="rgba(255,255,255,0.06)" letter-spacing="0.22em">PROJECT JO-JO</text>
-      </svg>
+      <video
+        id="rollSim"
+        src="rollSim.mp4"
+        autoplay
+        loop
+        muted
+        playsinline
+        style="width:100%; height:100%; object-fit:contain; display:block;">
+      </video>
     </div>
   </div>
 </section>
