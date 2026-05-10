@@ -990,7 +990,7 @@
       </div>
     </div>
 
-    <form class="contact-form-area" action="https://docs.google.com/forms/d/e/1FAIpQLSdFOMxc4wBIEcZxavS5ElCLfWpbc-cQKPeeYh4mEX2Mp-LHXQ/formResponse" method="POST" target="_blank">
+    <form id="contactForm" class="contact-form-area" action="https://docs.google.com/forms/d/e/1FAIpQLSdFOMxc4wBIEcZxavS5ElCLfWpbc-cQKPeeYh4mEX2Mp-LHXQ/formResponse" method="POST">
       <div class="form-row">
         <div class="field-group">
           <label class="field-label">Name</label>
@@ -1016,6 +1016,9 @@
         <label class="field-label">Tell me about your project</label>
         <textarea class="field-input" name="entry.1958687102" placeholder="What are you building? What do you need?"></textarea>
       </div>
+      <div id="successMsg" style="display:none; background:rgba(42,79,212,0.15); border:1px solid rgba(42,79,212,0.4); padding:1rem 1.2rem; font-family:'Courier New',monospace; font-size:0.85rem; color:#e8e6e0;">
+        ✓ Message sent successfully — I'll be in touch soon.
+      </div>
       <button type="submit" class="btn-primary" style="align-self:flex-start; cursor:pointer;">Send Message</button>
     </form>
   </div>
@@ -1028,6 +1031,23 @@
   </div>
   <div class="footer-copy">© 2026 Delusional Motorsports · Keizer, Oregon</div>
 </footer>
-
+<script>
+  document.getElementById('contactForm').addEventListener('submit', function(e) {
+    e.preventDefault();
+    var form = this;
+    var data = new FormData(form);
+    fetch(form.action, {
+      method: 'POST',
+      body: data,
+      mode: 'no-cors'
+    }).then(function() {
+      form.reset();
+      document.getElementById('successMsg').style.display = 'block';
+      setTimeout(() => {
+        document.getElementById('successMsg').style.display = 'none';
+      }, 5000);
+    });
+  });
+</script>
 </body>
 </html>
