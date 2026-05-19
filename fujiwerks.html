@@ -1,0 +1,420 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>FujiWerks — Delusional Motorsports</title>
+<link rel="icon" type="image/png" href="Monogram.png">
+<link rel="stylesheet" href="https://unpkg.com/@tabler/icons-webfont@2.47.0/tabler-icons.min.css">
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Mono:wght@400;500&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  :root {
+    --blue: #2a4fd4;
+    --blue-bright: #3d63f5;
+    --blue-dark: #1a35a8;
+    --blue-tint: rgba(42, 79, 212, 0.10);
+    --steel-light: #9a9894;
+    --off-white: #e8e6e0;
+    --black: #0d0d0c;
+    --surface: #111110;
+    --surface2: #161614;
+    --border: rgba(255,255,255,0.07);
+    --font-display: 'Bebas Neue', sans-serif;
+    --font-mono: 'DM Mono', monospace;
+    --font-body: 'DM Sans', sans-serif;
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: var(--font-body);
+    background: var(--black);
+    color: var(--off-white);
+    overflow-x: hidden;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+  }
+
+  /* ── NAV ── */
+  nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem 3rem;
+    border-bottom: 1px solid var(--border);
+    background: rgba(13,13,12,0.94);
+    backdrop-filter: blur(10px);
+    position: sticky;
+    top: 0;
+    z-index: 100;
+  }
+
+  .nav-logo img {
+    height: 48px;
+    width: auto;
+    display: block;
+  }
+
+  .nav-links {
+    display: flex;
+    gap: 2.5rem;
+    list-style: none;
+  }
+  .nav-links a {
+    font-family: var(--font-mono);
+    font-size: 0.70rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--steel-light);
+    text-decoration: none;
+    transition: color 0.2s;
+  }
+  .nav-links a:hover { color: var(--blue-bright); }
+  .nav-links a.active { color: var(--blue-bright); }
+
+  /* ── MAIN ── */
+  main {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 5rem 2rem;
+    position: relative;
+    overflow: hidden;
+  }
+
+  /* Subtle background glow */
+  main::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 60%;
+    height: 60%;
+    background: radial-gradient(ellipse, rgba(42,79,212,0.08) 0%, transparent 70%);
+    pointer-events: none;
+  }
+
+  /* Large background text */
+  .bg-text {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-family: var(--font-display);
+    font-size: 20vw;
+    color: rgba(255,255,255,0.018);
+    white-space: nowrap;
+    pointer-events: none;
+    user-select: none;
+    letter-spacing: -0.02em;
+  }
+
+  .content {
+    position: relative;
+    z-index: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    max-width: 700px;
+  }
+
+  .brand-tag {
+    font-family: var(--font-mono);
+    font-size: 0.68rem;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--blue-bright);
+    margin-bottom: 1.5rem;
+  }
+
+  .brand-name {
+    font-family: var(--font-display);
+    font-size: clamp(5rem, 14vw, 12rem);
+    line-height: 0.88;
+    letter-spacing: 0.04em;
+    color: var(--off-white);
+    margin-bottom: 1rem;
+  }
+
+  .brand-sub {
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--blue-bright);
+    margin-bottom: 3rem;
+  }
+
+  /* Construction badge */
+  .construction-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.7rem;
+    background: rgba(42,79,212,0.12);
+    border: 1px solid rgba(42,79,212,0.35);
+    padding: 0.6rem 1.4rem;
+    font-family: var(--font-mono);
+    font-size: 0.68rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--blue-bright);
+    margin-bottom: 3rem;
+  }
+
+  .badge-dot {
+    width: 8px;
+    height: 8px;
+    background: var(--blue-bright);
+    border-radius: 50%;
+    animation: pulse 1.8s ease-in-out infinite;
+  }
+
+  @keyframes pulse {
+    0%, 100% { opacity: 1; transform: scale(1); }
+    50% { opacity: 0.4; transform: scale(0.7); }
+  }
+
+  .desc {
+    font-size: 1rem;
+    font-weight: 300;
+    color: var(--steel-light);
+    line-height: 1.8;
+    margin-bottom: 3.5rem;
+    max-width: 540px;
+  }
+
+  /* What's coming section */
+  .coming-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1rem;
+    width: 100%;
+    margin-bottom: 3.5rem;
+  }
+
+  .coming-card {
+    background: var(--surface2);
+    border: 1px solid var(--border);
+    padding: 1.5rem 1.2rem;
+    text-align: center;
+    transition: border-color 0.25s;
+  }
+  .coming-card:hover { border-color: rgba(42,79,212,0.4); }
+
+  .coming-icon {
+    font-size: 1.4rem;
+    color: var(--blue-bright);
+    margin-bottom: 0.8rem;
+  }
+
+  .coming-title {
+    font-family: var(--font-display);
+    font-size: 1.3rem;
+    color: var(--off-white);
+    letter-spacing: 0.04em;
+    margin-bottom: 0.5rem;
+  }
+
+  .coming-desc {
+    font-size: 0.78rem;
+    color: var(--steel-light);
+    line-height: 1.65;
+  }
+
+  /* Notify form */
+  .notify-block {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.8rem;
+    width: 100%;
+    max-width: 460px;
+  }
+
+  .notify-label {
+    font-family: var(--font-mono);
+    font-size: 0.65rem;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--steel-light);
+  }
+
+  .notify-row {
+    display: flex;
+    width: 100%;
+    gap: 0;
+  }
+
+  .notify-input {
+    flex: 1;
+    background: var(--surface2);
+    border: 1px solid rgba(255,255,255,0.1);
+    border-right: none;
+    color: var(--off-white);
+    padding: 0.85rem 1rem;
+    font-family: var(--font-body);
+    font-size: 0.9rem;
+    outline: none;
+    transition: border-color 0.2s;
+  }
+  .notify-input:focus { border-color: var(--blue); }
+  .notify-input::placeholder { color: var(--steel-light); opacity: 0.45; }
+
+  .notify-btn {
+    font-family: var(--font-mono);
+    font-size: 0.68rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    background: var(--blue);
+    color: white;
+    border: none;
+    padding: 0.85rem 1.5rem;
+    cursor: pointer;
+    transition: background 0.2s;
+    white-space: nowrap;
+  }
+  .notify-btn:hover { background: var(--blue-bright); }
+
+  .notify-note {
+    font-family: var(--font-mono);
+    font-size: 0.60rem;
+    letter-spacing: 0.1em;
+    color: var(--steel-light);
+    opacity: 0.5;
+  }
+
+  /* Back link */
+  .back-link {
+    margin-top: 3rem;
+    font-family: var(--font-mono);
+    font-size: 0.68rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--steel-light);
+    text-decoration: none;
+    transition: color 0.2s;
+  }
+  .back-link:hover { color: var(--blue-bright); }
+
+  /* ── FOOTER ── */
+  footer {
+    padding: 1.5rem 3rem;
+    border-top: 1px solid var(--border);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: var(--surface);
+  }
+
+  .footer-logo img {
+    height: 36px;
+    width: auto;
+    opacity: 0.7;
+  }
+
+  .footer-copy {
+    font-family: var(--font-mono);
+    font-size: 0.60rem;
+    letter-spacing: 0.12em;
+    color: var(--steel-light);
+    opacity: 0.45;
+  }
+
+  /* ── RESPONSIVE ── */
+  @media (max-width: 600px) {
+    nav { padding: 1rem 1.5rem; }
+    .nav-links { display: none; }
+    .coming-grid { grid-template-columns: 1fr; }
+    .notify-row { flex-direction: column; }
+    .notify-input { border-right: 1px solid rgba(255,255,255,0.1); border-bottom: none; }
+    footer { flex-direction: column; gap: 1rem; text-align: center; padding: 1.5rem; }
+  }
+</style>
+</head>
+<body>
+
+<!-- ── NAV ── -->
+<nav>
+  <div class="nav-logo">
+    <a href="index.html"><img src="logo.png" alt="Delusional Motorsports"></a>
+  </div>
+  <ul class="nav-links">
+    <li><a href="index.html">Home</a></li>
+    <li><a href="index.html#project">Project Jo-Jo</a></li>
+    <li><a href="index.html#services">Services</a></li>
+    <li><a href="fujiwerks.html" class="active">FujiWerks</a></li>
+    <li><a href="index.html#contact">Contact</a></li>
+  </ul>
+</nav>
+
+<!-- ── MAIN ── -->
+<main>
+  <div class="bg-text">FW</div>
+
+  <div class="content">
+    <div class="brand-tag">// A Delusional Motorsports Venture</div>
+    <div class="brand-name">FujiWerks</div>
+    <div class="brand-sub">Mid-Engine VW Conversion Kits & Assemblies</div>
+
+    <div class="construction-badge">
+      <div class="badge-dot"></div>
+      Under Construction — Something big is coming
+    </div>
+
+    <p class="desc">
+      FujiWerks is being built to bring the mid-engine Subaru-powered VW Beetle
+      to anyone with the ambition to build one. Engineered kits, fully built
+      assemblies, and everything in between — designed from the ground up
+      through Project Jo-Jo and refined for you to build your own.
+    </p>
+
+    <!-- What's coming -->
+    <div class="coming-grid">
+      <div class="coming-card">
+        <div class="coming-icon"><i class="ti ti-components" aria-hidden="true"></i></div>
+        <div class="coming-title">Conversion Kits</div>
+        <p class="coming-desc">Complete engineered kit packages to mid-mount a Subaru EJ platform in a VW Beetle chassis.</p>
+      </div>
+      <div class="coming-card">
+        <div class="coming-icon"><i class="ti ti-settings-2" aria-hidden="true"></i></div>
+        <div class="coming-title">Built Assemblies</div>
+        <p class="coming-desc">Fully assembled and tested subframes, suspension, and drivetrain units ready to drop in.</p>
+      </div>
+      <div class="coming-card">
+        <div class="coming-icon"><i class="ti ti-wind" aria-hidden="true"></i></div>
+        <div class="coming-title">Aero Components</div>
+        <p class="coming-desc">Bespoke aerodynamic bodywork and components designed specifically for the mid-engine Beetle platform.</p>
+      </div>
+    </div>
+
+    <!-- Notify -->
+    <div class="notify-block">
+      <div class="notify-label">// Get notified when we launch</div>
+      <div class="notify-row">
+        <input class="notify-input" type="email" placeholder="your@email.com">
+        <button class="notify-btn">Notify Me</button>
+      </div>
+      <div class="notify-note">No spam. Launch announcement only.</div>
+    </div>
+
+    <a href="index.html" class="back-link">← Back to Delusional Motorsports</a>
+  </div>
+</main>
+
+<!-- ── FOOTER ── */
+<footer>
+  <div class="footer-logo">
+    <img src="logo.png" alt="Delusional Motorsports">
+  </div>
+  <div class="footer-copy">© 2026 FujiWerks · Delusional Motorsports · Keizer, Oregon</div>
+</footer>
+
+</body>
+</html>
