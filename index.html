@@ -653,12 +653,47 @@
     }
   }
 
+/* ── HAMBURGER ── */
+  .hamburger {
+    display: none;
+    flex-direction: column;
+    gap: 5px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 0.4rem;
+  }
+
+  .hamburger span {
+    display: block;
+    width: 24px;
+    height: 2px;
+    background: var(--off-white);
+    transition: all 0.3s ease;
+  }
+
+  .hamburger.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+  .hamburger.open span:nth-child(2) { opacity: 0; }
+  .hamburger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
   /* ── MOBILE (max 600px) ── */
   @media (max-width: 600px) {
+    .hamburger { display: flex; }
 
     .nav-links {
       display: none;
+      position: absolute;
+      top: 100%;
+      left: 0;
+      right: 0;
+      flex-direction: column;
+      background: rgba(13,13,12,0.98);
+      border-bottom: 1px solid var(--border);
+      padding: 1rem 1.5rem;
+      gap: 1.2rem;
     }
+
+    .nav-links.open { display: flex; }
 
     .hero-title {
       font-size: 3.5rem;
@@ -731,6 +766,11 @@
     <li><a href="fujiwerks.html">FujiWerks</a></li>
     <li><a href="#contact">Contact</a></li>
   </ul>
+ <button class="hamburger" id="hamburger" aria-label="Menu">
+  <span></span>
+  <span></span>
+  <span></span>
+</button>
 </nav>
 
 <!-- ── HERO ── -->
@@ -1047,6 +1087,23 @@
       setTimeout(() => {
         document.getElementById('successMsg').style.display = 'none';
       }, 5000);
+    });
+  });
+</script>
+ <script>
+  const hamburger = document.getElementById('hamburger');
+  const navLinks = document.querySelector('.nav-links');
+
+  hamburger.addEventListener('click', function() {
+    hamburger.classList.toggle('open');
+    navLinks.classList.toggle('open');
+  });
+
+  // Close menu when a link is clicked
+  navLinks.querySelectorAll('a').forEach(link => {
+    link.addEventListener('click', () => {
+      hamburger.classList.remove('open');
+      navLinks.classList.remove('open');
     });
   });
 </script>
