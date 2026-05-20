@@ -754,24 +754,7 @@
 <body>
 
 <!-- ── NAV ── -->
-<nav>
-  <div class="nav-logo">
-    <!-- Replace src with your actual logo path or hosted URL -->
-    <img src="logo.png" alt="Delusional Motorsports">
-  </div>
-  <ul class="nav-links">
-    <li><a href="#project">Project Jo-Jo</a></li>
-    <li><a href="#services">Services</a></li>
-    <li><a href="#channel">Channel</a></li>
-    <li><a href="fujiwerks.html">FujiWerks</a></li>
-    <li><a href="#contact">Contact</a></li>
-  </ul>
- <button class="hamburger" id="hamburger" aria-label="Menu">
-  <span></span>
-  <span></span>
-  <span></span>
-</button>
-</nav>
+<div id="nav-placeholder"></div>
 
 <!-- ── HERO ── -->
 <section class="hero">
@@ -1073,6 +1056,8 @@
   <div class="footer-copy">© 2026 Delusional Motorsports · Keizer, Oregon</div>
 </footer>
 <script>
+  // ── CONTACT FORM ──
+  // Submits form data to Google Forms and shows a success message
   document.getElementById('contactForm').addEventListener('submit', function(e) {
     e.preventDefault();
     var form = this;
@@ -1089,23 +1074,30 @@
       }, 5000);
     });
   });
-</script>
- <script>
-  const hamburger = document.getElementById('hamburger');
-  const navLinks = document.querySelector('.nav-links');
 
-  hamburger.addEventListener('click', function() {
-    hamburger.classList.toggle('open');
-    navLinks.classList.toggle('open');
-  });
+  // ── NAV ──
+  // Loads nav.html into the placeholder and initialises the hamburger menu
+  fetch('nav.html')
+    .then(res => res.text())
+    .then(data => {
+      document.getElementById('nav-placeholder').innerHTML = data;
+      const hamburger = document.getElementById('hamburger');
+      const navLinks = document.querySelector('.nav-links');
 
-  // Close menu when a link is clicked
-  navLinks.querySelectorAll('a').forEach(link => {
-    link.addEventListener('click', () => {
-      hamburger.classList.remove('open');
-      navLinks.classList.remove('open');
+      // Toggle menu open/closed on hamburger click
+      hamburger.addEventListener('click', function() {
+        hamburger.classList.toggle('open');
+        navLinks.classList.toggle('open');
+      });
+
+      // Close menu when any nav link is clicked
+      navLinks.querySelectorAll('a').forEach(link => {
+        link.addEventListener('click', () => {
+          hamburger.classList.remove('open');
+          navLinks.classList.remove('open');
+        });
+      });
     });
-  });
 </script>
 </body>
 </html>
