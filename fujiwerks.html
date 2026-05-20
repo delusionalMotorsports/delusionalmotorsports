@@ -397,13 +397,37 @@
   </div>
 </main>
 
-<!-- ── FOOTER ── */
+<!-- ── FOOTER ── -->
 <footer>
   <div class="footer-logo">
     <img src="logo.png" alt="Delusional Motorsports">
   </div>
   <div class="footer-copy">© 2026 FujiWerks · Delusional Motorsports · Keizer, Oregon</div>
 </footer>
+<script>
+   // ── NAV ──
+  // Loads nav.html into the placeholder and initialises the hamburger menu
+  fetch('nav.html')
+    .then(res => res.text())
+    .then(data => {
+      document.getElementById('nav-placeholder').innerHTML = data;
+      const hamburger = document.getElementById('hamburger');
+      const navLinks = document.querySelector('.nav-links');
 
+      // Toggle menu open/closed on hamburger click
+      hamburger.addEventListener('click', function() {
+        hamburger.classList.toggle('open');
+        navLinks.classList.toggle('open');
+      });
+
+      // Close menu when any nav link is clicked
+      navLinks.querySelectorAll('a').forEach(link => {
+        link.addEventListener('click', () => {
+          hamburger.classList.remove('open');
+          navLinks.classList.remove('open');
+        });
+      });
+    });
+</script>
 </body>
 </html>
