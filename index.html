@@ -966,13 +966,12 @@
     <div class="yt-embed-block">
       <div class="yt-label">// @DelusionalMotorsports</div>
       <!-- Update href and src with new video URL and thumbnail when uploading new content -->
-      <a href="https://youtu.be/pgj4uPIlblI" target="_blank" rel="noopener" class="yt-thumb">
-        <img
-          src="https://img.youtube.com/vi/sHcYqQiq-Nc/maxresdefault.jpg"
-          alt="Project Jo-Jo — Build Updates"
-          style="width:100%; height:100%; object-fit:cover; display:block;">
-        <!-- <div class="yt-play-btn">▶</div> ***** UNCOMMENT IF I WANT TO ADD THE BUTTON AGAIN LATER-->
-      </a>
+      <a href="#" id="latest-video-link" target="_blank" rel="noopener" class="yt-thumb">
+         <img 
+            id="latest-video-thumb" 
+            alt="Project Jo-Jo - Build Updates"
+            style="width:100%; height:100%; object-fit:cover; display:block;"
+         > </a>
       <div style="display:flex; justify-content:space-between; align-items:center;">
         <div>
           <div style="font-family:'DM Mono',monospace;font-size:0.62rem;color:var(--steel-light);letter-spacing:0.13em;text-transform:uppercase;">Latest</div>
@@ -1100,6 +1099,12 @@
         });
       });
     });
+    // — UPDATE LATEST YOUTUBE VIDEO HERE —
+   const latestVideoId = "pgj4uPIlblI"; // <-- This is the ONLY line you have to change next time!
+   
+   // Automatically updates the watch link and the thumbnail image URL
+   document.getElementById("latest-video-link").href = `https://youtu.be/${latestVideoId}`;
+   document.getElementById("latest-video-thumb").src = `https://img.youtube.com/vi/${latestVideoId}/maxresdefault.jpg`;
 </script>
 </body>
 </html>
