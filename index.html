@@ -603,6 +603,26 @@
     opacity: 0.45;
   }
 
+  .footer-social {
+    display: flex;
+    gap: 1.2rem;
+    align-items: center;
+   }
+ 
+  .social-icon {
+    color: var(--steel-light);
+    font-size: 1.3rem;
+    text-decoration: none;
+    transition: color 0.2s, transform 0.2s;
+    display: flex;
+    align-items: center;
+   }
+ 
+  .social-icon:hover {
+    color: var(--blue-bright);
+    transform: translateY(-2px);
+   }
+
   /* ── TABLET (max 900px) ── */
   @media (max-width: 900px) {
 
@@ -750,6 +770,10 @@
       text-align: center;
       padding: 1.5rem;
     }
+
+  .footer-social {
+    order: -1;
+   }
   }
 </style>
 </head>
@@ -1054,8 +1078,22 @@
   <div class="footer-logo">
     <img src="logo.png" alt="Delusional Motorsports">
   </div>
+
+  <div class="footer-social">
+    <a href="https://www.youtube.com/channel/UCsoa295gY2Qj58TnqipNcmw" target="_blank" rel="noopener" class="social-icon" aria-label="YouTube">
+      <i class="ti ti-brand-youtube"></i>
+    </a>
+    <a href="https://www.instagram.com/delusionalmotorsports" target="_blank" rel="noopener" class="social-icon" aria-label="Instagram">
+      <i class="ti ti-brand-instagram"></i>
+    </a>
+    <a href="https://www.facebook.com/profile.php?id=61587623337791" target="_blank" rel="noopener" class="social-icon" aria-label="Facebook">
+      <i class="ti ti-brand-facebook"></i>
+    </a>
+  </div>
+
   <div class="footer-copy">© 2026 Delusional Motorsports · Keizer, Oregon</div>
 </footer>
+ 
 <script>
   // ── CONTACT FORM ──
   // Submits form data to Google Forms and shows a success message
